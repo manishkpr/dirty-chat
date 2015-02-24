@@ -1,0 +1,23 @@
+extends ../layout.jade
+block content
+	h1 Hello
+	- if (!session.authenticated) {
+	form.form-signin(action='/session/create' method='POST')
+		h4.form-signin-heading Войти
+		- if (flash && flash.err) {
+		ul
+			- Object.keys(flash.err).forEach(function(error) {
+			- var errMsg = JSON.stringify(flash.err[error]);
+			- console.log(errMsg);
+			li= errMsg
+			- })
+		- }
+		.control-group
+			input.form-control(type='text', name='email' id='email', placeholder='email@example.ru')
+		.control-group
+			input.form-control(type='password', name='password' id='password', placeholder='Password')
+			input.btn.btn-lg.btn-primary.btn-block(type='submit', value='Войти')
+			input(type='hidden' name='_csrf' value= _csrf)
+	-} else {
+		a(href='/session/destroy') Выйти
+	-};

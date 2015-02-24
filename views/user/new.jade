@@ -1,0 +1,23 @@
+extends ../layout.jade
+block content
+	form#sign-up-form.form-signin(action='/user/create' method='POST')
+		h2.form-signin-heading Регистрация
+		- if (flash && flash.err) {
+		ul
+			- Object.keys(flash.err).forEach(function(error) {
+				- var errMsg = JSON.stringify(flash.err[error]);
+				- console.log(errMsg);
+			li= errMsg
+				- })
+		- }
+		.control-group
+			input.form-control(type='text', name='login' id='inputLogin', placeholder='Login')
+		.control-group
+			input.form-control(type='text', name='email' id='inputEmail', placeholder='Email')
+		.control-group
+			input.form-control(type='password', name='password' id='password', placeholder='Password')
+		.control-group
+			input.form-control(type='password', name='confirm' id='confirm', placeholder='Еще раз')
+		input.btn.btn-lg.btn-primary.btn-block(type='submit', value='Создать')
+		input(type='hidden' name='encryptedPassword' value='lkjl')
+		input(type='hidden' name='_csrf' value= _csrf)
