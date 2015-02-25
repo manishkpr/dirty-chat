@@ -13,7 +13,7 @@ module.exports = {
 
 	create: function(req, res, next) {
 		if (!req.param('email') || !req.param('password')) {
-			var loginPasswordRequiredError = [{name: 'loginPasswordRequiredError', 
+			var loginPasswordRequiredError = [{name: 'loginPasswordRequiredError',
 				message: 'Введите логин и пароль!'}];
 
 			req.session.flash = { err: loginPasswordRequiredError }
@@ -25,7 +25,7 @@ module.exports = {
 			if (err) return next(err);
 
 			if (!user) {
-				var noAccountError = [{name: 'noAccount', 
+				var noAccountError = [{name: 'noAccount',
 				message: 'Email ' + req.param('email') + 'не найден!'}];
 
 				req.session.flash = { err: noAccountError}
@@ -46,6 +46,11 @@ module.exports = {
 					return;
 				}
 
+				if (req.session.user.admin) {
+					res.redirect('/user');
+					return;
+				}
+
 				req.session.authenticated = true;
 				req.session.User = user;
 				res.redirect('/user/show/' + user.id)
@@ -58,4 +63,3 @@ module.exports = {
 		res.redirect('session/new');
 	}
 };
-

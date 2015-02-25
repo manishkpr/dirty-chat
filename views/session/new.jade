@@ -1,6 +1,5 @@
 extends ../layout.jade
 block content
-	h1 Hello
 	- if (!session.authenticated) {
 	form.form-signin(action='/session/create' method='POST')
 		h4.form-signin-heading Войти

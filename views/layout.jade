@@ -11,44 +11,39 @@ html(lang=ru)
 		<!--SCRIPTS-->
 		script(src='/js/dependencies/sails.io.js')
 		script(src='/js/jquery.js')
+		script(src='/js/bootstrap.min.js')
 		script(src='/js/jquery.validate.min.js')
 		script(src='/js/customValidate.js')
 		<!--SCRIPTS END-->
 	body
 		.navbar.navbar-inverse.navbar-fixed-top
 			.navbar-inner
-				.container
-					a.btn.btn-navbar.collapsed(data-toggle='collapse' data-target='.nav-collapse')
+				.container-fluid
+					a.btn.btn-navbar(data-toggle='collapse' data-target='.nav-collapse')
 						img(src='/images/glyphicons-517-menu-hamburger.png')
 					a.brand(href='#') Dirty chat
-					.container(style='vertical-align: top;')
-						- if (!session.authenticated) {
-						form.form-inline(action='/session/create' method='POST' style="float: right;")
-							//- h4.form-signin-heading Войти
-							- if (flash && flash.err) {
-							ul
-								- Object.keys(flash.err).forEach(function(error) {
-								- var errMsg = JSON.stringify(flash.err[error]);
-								- console.log(errMsg);
-								li= errMsg
-								- })
-							- }
-							input.input-small(type='text', name='email' id='email', placeholder='email@example.ru')
-							input.input-small(type='password', name='password' id='password', placeholder='Password')
-							input.btn(type='submit', value='Войти')
-							input(type='hidden' name='_csrf' value= _csrf)
-						-} else {
-							a(href='/session/destroy') Выйти
-						-};
 					.nav-collapse.collapse(style='height: 0px;')
 						ul.nav
-							li.active Пользователи
-								a(href='/user')
-							li 2
-							li 3
+							li.active
+								a(href='/user') Пользователи
+							li
+								a(href='/user') SomeItem
+							li
+								a(href='/user') SomeItem2
+							li
+								- if (!session.authenticated) {
+								form.navbar-form(action='/session/create' method='POST')
+									input.input-small(type='text', name='email' id='email', placeholder='email@example.ru')
+									input.input-small(type='password', name='password' id='password', placeholder='Password')
+									input.btn(type='submit'  value='Войти')
+									input(type='hidden' name='_csrf' value= _csrf)
+									-} else {
+										a.btn.btn-small(href='/session/destroy') Выйти
+									-};
 		.container-fluid
 			.row-fluid
 				#main.span9
-					block content
+					.container
+						block content
 				#side.span3
 					block adm_menu

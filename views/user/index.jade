@@ -1,31 +1,27 @@
 extends ../layout.jade
 block content
-	.container-fluid
-		.row-fluid
-			#main.span9
-				.container
-					h3 Пользователи
-					table.table.table-hover
-						tr
-							th ID
-							th Имя
-							th Email
-							th
-							th
-							th
-						- users.forEach(function(user) {
-						tr
-							td= user.id
-							td=	user.login
-							td=	user.email
-							td 
-								a.btn.btn-info(href='/user/show/' + user.id) Просмотр
-							td
-								a.btn.btn-warning(href='/user/edit/' + user.id) Изменить
-							td
-								form(action='/user/destroy/' + user.id, method='POST')
-									input(type='hidden', name='_method' value='delete')
-									input.btn.btn-danger(type='submit', value='Удалить')
-									input(type='hidden' name='_csrf' value= _csrf)
-						- });
-					a.btn.btn-success(href='/user/new/') Создать
+	h3 Пользователи
+	table.table.table-hover
+		tr
+			th ID
+			th Имя
+			th Email
+			th
+			th
+			th
+		- users.forEach(function(user) {
+		tr
+			td= user.id
+			td=	user.login
+			td=	user.email
+			td 
+				a.btn.btn-info(href='/user/show/' + user.id) Просмотр
+			td
+				a.btn.btn-warning(href='/user/edit/' + user.id) Изменить
+			td
+				form(action='/user/destroy/' + user.id, method='POST')
+					input(type='hidden', name='_method' value='delete')
+					input.btn.btn-danger(type='submit', value='Удалить')
+					input(type='hidden' name='_csrf' value= _csrf)
+		- });
+	a.btn.btn-success(href='/user/new/') Создать
