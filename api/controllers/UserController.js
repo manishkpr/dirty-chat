@@ -21,6 +21,8 @@ module.exports = {
 				return res.redirect('/user/new');
 			}
 
+			req.session.authenticated = true;
+			req.session.User = user;
 			res.redirect('/user/show/' + user.id);
 		});
 	},
@@ -59,13 +61,12 @@ module.exports = {
 	},
 
 	update: function(req, res, next) {
-		
 		User.update(req.param('id'), req.params.all(), function userUpdated(err) {
 			if (err) {
 				req.session.flash = {
 					err: err
 				};
-
+				console.log(err);
 				res.redirect('/user/edit/' + req.param('id'));
 			}
 			else
@@ -75,9 +76,9 @@ module.exports = {
 
 	destroy: function(req, res, next) {
 		User.findOne(req.param('id'), function foundUser(err, user) {
-			if (err) 
+			if (err)
 				return next(err);
-			else if(!user) 
+			else if(!user)
 				return next('Пользователь не существует');
 			else {
 				User.destroy(req.param('id'), function userDestroyed(err) {
@@ -89,4 +90,3 @@ module.exports = {
 		});
 	}
 };
-

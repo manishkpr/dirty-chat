@@ -33,7 +33,7 @@ module.exports = {
 			defaultsTo: false
 		},
 
-	birthDate: {
+		birthDate: {
 			type: 'date',
 		},
 
@@ -78,13 +78,8 @@ module.exports = {
 	},
 
 	beforeValidate: function(values, next) {
-		//console.log("i\'m here!");
-		if (values.birdDate && _.isNaN(Date.parse(values.birdDate))) {
-			console.log(values.birdDate);
-			return next({err: ["Дата указана неверно!"]});
-		}
-
-		values.birdDate = Date.parse(values.birdDate);
+		var splitDate = values.birthDate.split('.');
+		values.birthDate = new Date(splitDate[2], splitDate[1] - 1, splitDate[0]);
 		next();
 	}
 };

@@ -3,4 +3,6 @@ block content
 	h3= user.login
 	hr
 	h4= 'Связаться: ' + user.email
-	button.btn.btn-link изменить
+	- var bd = user.birthDate.toString();
+	h5= 'Дата рождения: ' + bd
+	a.btn.btn-link(href='/user/edit/' + user.id) изменить

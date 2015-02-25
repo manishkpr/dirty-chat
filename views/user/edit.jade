@@ -1,28 +1,39 @@
 extends ../layout.jade
 block content
 	form(action='/user/update/' + user.id method='POST')
-	h2.form-signin-heading Изменить
-	- if (flash && flash.err) {
-	ul
-		- Object.keys(flash.err).forEach(function(error) {
-			- var errMsg = JSON.stringify(flash.err[error]);
-			- console.log(errMsg);
-		li= errMsg
-			- })
-	- }
-	.control-group
-		input.form-control(type='text', name='login' id='inputLogin', placeholder='Login', value= user.login)
-	.control-group
-		input.form-control(type='text', name='email' id='inputEmail', placeholder='Email', value= user.email)
-	.control-group
-		input.form-control(type='text', name='birthDate' id='birthDate', data-date-format="dd.mm.yyyy", placeholder='Дата рождения' value= user.birthDate)
-	.control-group
-		select.form-control(name='sex' id='sex', placeholder='Пол')
-	.control-group
-		select.form-control(name='position' id='position', placeholder='Позиционирование')
-	.control-group
-		input.form-control(type='text', name='country' id='country', placeholder='Страна')
-	.control-group
-		input.form-control(type='text', name='city' id='city', placeholder='Город')
-	input.btn.btn-lg.btn-primary(type='submit', value='Изменить')
-	input(type='hidden' name='_csrf' value= _csrf)
+		h2.form-signin-heading Изменить
+		- if (flash && flash.err) {
+		ul
+			- Object.keys(flash.err).forEach(function(error) {
+				- var errMsg = JSON.stringify(flash.err[error]);
+				- console.log(errMsg);
+			li= errMsg
+				- })
+		- }
+		.control-group
+			input.form-control(type='text', name='login' id='inputLogin', placeholder='Login', value= user.login)
+		.control-group
+			input.form-control(type='text', name='email' id='inputEmail', placeholder='Email', value= user.email)
+		- if (session.authenticated && session.User.admin) {
+			- if(user.admin) {
+			input(type='hidden' name='admin' value="unchecked")
+			label.checkbox Admin
+				input(type='checkbox', name='admin' checked)
+			- } else {
+			input(type='hidden' name='admin' value="unchecked")
+			label.checkbox Admin
+				input(type='checkbox', name='admin' disabled='true')
+			- }
+		- }	
+		.control-group
+			input.form-control(type='text', name='birthDate' id='birthDate', data-date-format="dd.mm.yyyy", placeholder='Дата рождения' value= user.birthDate.toString())
+		.control-group
+			select.form-control(name='sex' id='sex', placeholder='Пол')
+		.control-group
+			select.form-control(name='position' id='position', placeholder='Позиционирование')
+		.control-group
+			input.form-control(type='text', name='country' id='country', placeholder='Страна')
+		.control-group
+			input.form-control(type='text', name='city' id='city', placeholder='Город')
+		input.btn.btn-lg.btn-primary(type='submit', value='Изменить')
+		input(type='hidden' name='_csrf' value= _csrf)

@@ -46,13 +46,14 @@ module.exports = {
 					return;
 				}
 
-				if (req.session.user.admin) {
+				req.session.authenticated = true;
+				req.session.User = user;
+
+				if (req.session.User.admin) {
 					res.redirect('/user');
 					return;
 				}
 
-				req.session.authenticated = true;
-				req.session.User = user;
 				res.redirect('/user/show/' + user.id)
 			});
 		});
