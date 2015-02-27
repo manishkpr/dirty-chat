@@ -16,14 +16,22 @@ module.exports = {
 				console.log(err);
 				req.session.flash = {
 					err: err
-				}
+				};
 
 				return res.redirect('/user/new');
 			}
 
+			//User login
 			req.session.authenticated = true;
 			req.session.User = user;
-			res.redirect('/user/show/' + user.id);
+
+			// Change online status
+			user.online = true;
+			user.save(function (err, user) {
+				if (err) return next(err);
+
+				res.redirect('/user/show/' + user.id);
+			});
 		});
 	},
 

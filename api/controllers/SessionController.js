@@ -16,7 +16,7 @@ module.exports = {
 			var loginPasswordRequiredError = [{name: 'loginPasswordRequiredError',
 				message: 'Введите логин и пароль!'}];
 
-			req.session.flash = { err: loginPasswordRequiredError }
+			req.session.flash = { err: loginPasswordRequiredError };
 			res.redirect('session/new');
 			return;
 		}
@@ -28,7 +28,7 @@ module.exports = {
 				var noAccountError = [{name: 'noAccount',
 				message: 'Email ' + req.param('email') + 'не найден!'}];
 
-				req.session.flash = { err: noAccountError}
+				req.session.flash = { err: noAccountError};
 				res.redirect('session/new');
 				return;
 			}
@@ -41,26 +41,36 @@ module.exports = {
 					var loginPasswordMismatchError = [{ name: 'loginPasswordMismatch',
 						message: 'Учетные данные указаны неверно'}];
 
-					req.session.flash = { err: loginPasswordMismatchError }
+					req.session.flash = { err: loginPasswordMismatchError };
 					res.redirect('session/new');
 					return;
 				}
 
 				req.session.authenticated = true;
 				req.session.User = user;
+				user.online = true;
+				user.save(function (err, user) {
+					if (err) return next(err);
 
-				if (req.session.User.admin) {
-					res.redirect('/user');
-					return;
-				}
+					if (req.session.User.admin) {
+						res.redirect('/user');
+						return;
+					}
 
-				res.redirect('/user/show/' + user.id)
+					res.redirect('/user/show/' + user.id);
+				});
 			});
 		});
 	},
 
 	destroy: function(req, res, next) {
-		req.session.destroy();
-		res.redirect('session/new');
+		User.update(userId, {
+			online: false
+		}, function (err) {
+			if (err) return next(err);
+
+			req.session.destroy();
+			res.redirect('session/new');
+		});
 	}
 };

@@ -7,6 +7,7 @@ html(lang=ru)
 		link(rel='stylesheet', href='/styles/importer.css')
 		link(rel='stylesheet', href='/css/bootstrap.css')
 		link(rel='stylesheet', href='/css/datepicker.css')
+		link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css')
 		link(rel='stylesheet', href='/css/bootstrap-responsive.css')
 		<!--STYLES END-->
 		<!--SCRIPTS-->
@@ -22,12 +23,14 @@ html(lang=ru)
 			.navbar-inner
 				.container-fluid
 					a.btn.btn-navbar(data-toggle='collapse' data-target='.nav-collapse')
-						img(src='/images/glyphicons-517-menu-hamburger.png')
-					a.brand(href='#') Dirty chat
+						i.fa.fa-bars.fa-lg
+					a.brand(href='/') Dirty chat
 					.nav-collapse.collapse(style='height: 0px;')
 						ul.nav
 							li.active
-								a(href='/user') Пользователи
+								a(href='/user')
+									i.fa.fa-users.fa-fw
+										|&nbsp;Пользователи
 							li
 								a(href='/user') SomeItem
 							li

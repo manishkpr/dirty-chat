@@ -53,6 +53,11 @@ module.exports = {
 			model:'positioning'
 		},
 
+		online: {
+			type: 'boolean',
+			defaultsTo: false
+		},
+
 		toJSON: function() {
 			var obj = this.toObject();
 			delete obj.password;
@@ -77,9 +82,9 @@ module.exports = {
 			});
 	},
 
-	beforeValidate: function(values, next) {
-		var splitDate = values.birthDate.split('.');
-		values.birthDate = new Date(splitDate[2], splitDate[1] - 1, splitDate[0]);
-		next();
-	}
+	//beforeValidate: function(values, next) {
+//		var splitDate = values.birthDate.toString().split('.');
+//		values.birthDate = new Date(splitDate[2], splitDate[1] - 1, splitDate[0]);
+//		next();
+//	}
 };

@@ -26,7 +26,11 @@ block content
 			- }
 		- }	
 		.control-group
-			input.form-control(type='text', name='birthDate' id='birthDate', data-date-format="dd.mm.yyyy", placeholder='Дата рождения' value= user.birthDate.toString())
+			-var bd = '';
+			-if (user.birthDate){
+			-	bd = user.birthDate;
+			-}
+			input.form-control(type='text', name='birthDate' id='birthDate', data-date-format="dd.mm.yyyy", placeholder='Дата рождения' value= bd)
 		.control-group
 			select.form-control(name='sex' id='sex', placeholder='Пол')
 		.control-group

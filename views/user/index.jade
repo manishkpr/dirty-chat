@@ -3,25 +3,45 @@ block content
 	h3 Пользователи
 	table.table.table-hover
 		tr
+			th
 			th ID
 			th Имя
 			th Email
 			th
 			th
 			th
+			th
 		- users.forEach(function(user) {
 		tr
+			td
+				- if(user.online) {
+				i.fa.fa-sign-in.fa-lg
+				-} else {
+				i.fa.fa-sign-out.fa-lg
+				-}
 			td= user.id
 			td=	user.login
 			td=	user.email
-			td 
-				a.btn.btn-info(href='/user/show/' + user.id) Просмотр
 			td
-				a.btn.btn-warning(href='/user/edit/' + user.id) Изменить
+				-if(user.admin){
+				img(src='/img/glyphicons-555-king.png')
+				-} else {
+				img(src='/img/glyphicons-557-pawn.png')
+				-}
+			td 
+				a.btn.btn-info.btn-medium(href='/user/show/' + user.id)
+					i.fa.fa-edit.fa-fw
+			td
+				a.btn.btn-warning.btn-medium(href='/user/edit/' + user.id)
+					//img(src='/img/glyphicons-31-pencil.png')
+					i.fa.fa-cog.fa-fw
 			td
 				form(action='/user/destroy/' + user.id, method='POST')
 					input(type='hidden', name='_method' value='delete')
-					input.btn.btn-danger(type='submit', value='Удалить')
+
+					button.btn.btn-danger(type='submit')
+						i.fa.fa-trash.fa-fw
 					input(type='hidden' name='_csrf' value= _csrf)
 		- });
-	a.btn.btn-success(href='/user/new/') Создать
+	a.btn.btn-success(href='/user/new/')
+		i.fa.fa-user-plus.fa-lg
