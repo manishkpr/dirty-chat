@@ -11,7 +11,23 @@ module.exports = {
 	},
 
 	create: function (req, res, next) {
-		User.create(req.params.all(), function userCreated (err, user) {
+		var userObj;
+		if (req.session.user.admin) {
+			userObj = {
+				login: req.param('login'),
+				email: req.param('email'),
+				admin: req.param('admin'),
+				encryptedPassword: req.param('encryptedPassword')
+			};
+		}else {
+			userObj = {
+				login: req.param('login'),
+				email: req.param('email'),
+				encryptedPassword: req.param('encryptedPassword')
+			};
+		}
+
+		User.create(userObj, function userCreated (err, user) {
 			if (err) {
 				console.log(err);
 				req.session.flash = {
@@ -69,12 +85,27 @@ module.exports = {
 	},
 
 	update: function(req, res, next) {
-		User.update(req.param('id'), req.params.all(), function userUpdated(err) {
+		var userObj;
+		if (req.session.user.admin) {
+			userObj = {
+				login: req.param('login'),
+				email: req.param('email'),
+				admin: req.param('admin')
+			};
+		}else {
+			userObj = {
+				login: req.param('login'),
+				email: req.param('email')
+			};
+		};
+
+
+		User.update(req.param('id'), userObj, function userUpdated(err) {
 			if (err) {
 				req.session.flash = {
 					err: err
 				};
-				console.log(err);
+
 				res.redirect('/user/edit/' + req.param('id'));
 			}
 			else
@@ -95,6 +126,16 @@ module.exports = {
 
 				res.redirect('/user');
 			}
+		});
+	},
+
+	subscribe: function(req, res) {
+		User.find(function foundUsers(err,users){
+			if (err) return next(err);
+
+			User.subscribe(req.socket);
+			User.subscribe(req.socket, users);
+			res.send(200);
 		});
 	}
 };

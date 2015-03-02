@@ -1,0 +1,11 @@
+extends ../layout.jade
+block content
+	.container
+		h2 Hello
+		.messages
+block users
+	.container
+		ul.user-list
+		-users.forEach(function(user) {
+			li.chat-user= user.login	
+		-}); 

@@ -33,7 +33,7 @@ module.exports = {
 				return;
 			}
 
-
+			//console.log('Нашли пользователя');
 			bcrypt.compare(req.param('password'), user.encryptedPassword, function(err, valid) {
 				if (err) return next(err);
 
@@ -48,9 +48,16 @@ module.exports = {
 
 				req.session.authenticated = true;
 				req.session.User = user;
+
 				user.online = true;
 				user.save(function (err, user) {
 					if (err) return next(err);
+
+					//Inform other sockets that this user is now logged in
+
+					User.publishUpdate(user.id, {
+						loggedIn: true,
+						id: user.id});
 
 					if (req.session.User.admin) {
 						res.redirect('/user');
@@ -64,9 +71,7 @@ module.exports = {
 	},
 
 	destroy: function(req, res, next) {
-		User.update(userId, {
-			online: false
-		}, function (err) {
+		User.update(req.session.user, {online: false}, function (err) {
 			if (err) return next(err);
 
 			req.session.destroy();
