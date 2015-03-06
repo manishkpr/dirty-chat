@@ -99,7 +99,6 @@ module.exports = {
 			};
 		};
 
-
 		User.update(req.param('id'), userObj, function userUpdated(err) {
 			if (err) {
 				req.session.flash = {
@@ -132,8 +131,8 @@ module.exports = {
 	subscribe: function(req, res) {
 		User.find(function foundUsers(err,users){
 			if (err) return next(err);
-
-			User.subscribe(req.socket);
+			//console.log(users);
+			User.watch(req);
 			User.subscribe(req.socket, users);
 			res.send(200);
 		});

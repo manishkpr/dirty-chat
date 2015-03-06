@@ -12,7 +12,7 @@ block content
 			th
 			th
 		- users.forEach(function(user) {
-		tr
+		tr(data-id= user.id data-model="user")
 			td
 				- if(user.online) {
 				i.fa.fa-sign-in.fa-lg

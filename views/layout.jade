@@ -5,7 +5,8 @@ html(lang=ru)
 		meta(name='viewport', content='width=device-width', initial-scale=1, maximum-scale=1)
 		<!--STYLES-->
 		link(rel='stylesheet', href='/styles/importer.css')
-		link(rel='stylesheet', href='/css/bootstrap.css')
+		link(rel='stylesheet', href='/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/css/site.css')
 		link(rel='stylesheet', href='/css/datepicker.css')
 		link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css')
 		link(rel='stylesheet', href='/css/bootstrap-responsive.css')
@@ -17,7 +18,9 @@ html(lang=ru)
 		script(src='/js/bootstrap-datepicker.js')
 		script(src='/js/jquery.validate.min.js')
 		script(src='/js/customValidate.js')
-		script(src='/js/app.js')
+		script(src='/js/respond.min.js')
+		script(src='/js/html5shiv.js')
+		script(src='/js/site.min.js')
 		<!--SCRIPTS END-->
 	body
 		.navbar.navbar-inverse.navbar-fixed-top
@@ -28,7 +31,7 @@ html(lang=ru)
 					a.brand(href='/') Dirty chat
 					.nav-collapse.collapse(style='height: 0px;')
 						ul.nav
-							li.active
+							li
 								a(href='/user')
 									i.fa.fa-users.fa-fw
 										|&nbsp;Пользователи

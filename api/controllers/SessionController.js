@@ -71,10 +71,15 @@ module.exports = {
 	},
 
 	destroy: function(req, res, next) {
-		User.update(req.session.user, {online: false}, function (err) {
+		User.update({id: req.session.User.id}, {online: false}, function (err) {
 			if (err) return next(err);
 
+			User.publishUpdate(req.session.User.id, {
+				loggedIn: false,
+				id: req.session.User.id});
+
 			req.session.destroy();
+
 			res.redirect('session/new');
 		});
 	}

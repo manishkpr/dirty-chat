@@ -2,7 +2,9 @@ extends ../layout.jade
 block content
 	.container
 		h2 Hello
-		.messages
+		#messages
+		textarea#input-message.form-control(rows='3')
+		buton#send-message.btn.btn-default.tn-block Отправить
 block users
 	.container
 		ul.user-list
