@@ -1,5 +1,5 @@
 /**
-* Chat.js
+* Message.js
 *
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
@@ -8,17 +8,14 @@
 module.exports = {
 
   attributes: {
+      text: 'string',
+      author: {
+          model: 'user'
+      },
 
-    index : 'string',
-    name: 'string',
-    messages: {
-        collection: 'message',
-        via: 'chat'
-    },
+      chat: {
+        model: chat  
+      }
 
-    users: {
-        collection: 'user',
-        via: 'chats'
-    }
   }
 };

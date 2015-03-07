@@ -58,6 +58,16 @@ module.exports = {
 			defaultsTo: false
 		},
 
+		messages: {
+			collection: 'message',
+			via: 'author'
+		},
+
+		chats: {
+			collection: 'chat',
+			via: 'users'
+		},
+
 		toJSON: function() {
 			var obj = this.toObject();
 			delete obj.password;

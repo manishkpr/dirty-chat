@@ -1,41 +1,46 @@
 $(document).ready(function() {
-	$('#sign-up-form').validate({
-		rules: {
-			login: {
-				required: true
+	if($('form').is('#sign-up-form')) {
+		$('#sign-up-form').validate({
+			rules: {
+				login: {
+					required: true
+				},
+				email: {
+					required: true,
+					email: true
+				},
+				password: {
+					minlength: 6,
+					required: true
+				},
+				confirm: {
+					minlength: 6,
+					equalTo: "#password"
+				}
 			},
-			email: {
-				required: true,
-				email: true
-			},
-			password: {
-				minlength: 6,
-				required: true
-			},
-			confirm: {
-				minlength: 6,
-				equalTo: "#password"
+
+			success: function(element) {
+				element.text('OK!').addClass('valid');
 			}
-		},
+		});
+	}
 
-		success: function(element) {
-			element.text('OK!').addClass('valid');
-		}
-	});
+	if($('input').is('#birthDate')){
+		$('input').is('#birthDate').datepicker();
+	}
 
-	$('#birthDate').datepicker();
-
-	$('send-message').click(functuin() {
-		$('#messages').append('<div class="col-md-6">'+ '<div = class="popover left">'+'<div class="arrow">'+'<h3 class="popover-title"> Ромачка </h3>'+ '<div class="popover-content">' + $("#input-message").val() +
-					'</div><div></div>'
-		);
-	});
+	if($('button').is('#send-message'))	{
+		$('#send-message').click(function(){
+		var msg = $('#input-message').val();
+		$('#input-message').val('');
+		if (msg && msg !=='')
+			$('#messages').append('<blockquote><p>'+msg+'</p><small>Ромачка<small></div></div>');
+	});}
 
 	var socket = io.sails.connect();
 
 	socket.on('connect', function socketConnected(message) {
-		console.log('I connected');
-		 // $('#chatAudio')[0].play();
+		// $('#chatAudio')[0].play();
 		socket.on('user', function messageRecieved(message) {
 			var userId = message.id;
 			updateUserInDom(userId, message);

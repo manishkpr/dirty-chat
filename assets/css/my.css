@@ -1,0 +1,12 @@
+#messages {
+	height: 90%;
+	width: 90%;
+	margin-bottom: 10px;
+	overflow-y: auto;
+	padding-left: 5px;
+	/*position: absolute;*/
+}
+
+.myleft{
+	margin-left: 20px;
+}
