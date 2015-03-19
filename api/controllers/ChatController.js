@@ -19,6 +19,8 @@ module.exports = {
 		res.view({users: users});
 	});
 
-    Message.find({chatId: req.chatId}, function)
+    Message.find({chatId: req.chatId}, function(err, messages){
+
+    });
   }
 };

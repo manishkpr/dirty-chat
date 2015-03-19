@@ -14,7 +14,7 @@ module.exports = {
       },
 
       chat: {
-        model: chat  
+        model: 'chat'
       }
 
   }

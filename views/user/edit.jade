@@ -14,17 +14,9 @@ block content
 			input.form-control(type='text', name='login' id='inputLogin', placeholder='Login', value= user.login)
 		.control-group
 			input.form-control(type='text', name='email' id='inputEmail', placeholder='Email', value= user.email)
-		- if (session.authenticated && session.User.admin) {
-			- if(user.admin) {
-			input(type='hidden' name='admin' value="unchecked")
+			input(type='hidden' name='admin' value="checked")
 			label.checkbox Admin
-				input(type='checkbox', name='admin' checked)
-			- } else {
-			input(type='hidden' name='admin' value="unchecked")
-			label.checkbox Admin
-				input(type='checkbox', name='admin' disabled='true')
-			- }
-		- }	
+			input(type='checkbox', name='admin' unchecked)
 		.control-group
 			-var bd = '';
 			-if (user.birthDate){
@@ -32,12 +24,21 @@ block content
 			-}
 			input.form-control(type='text', name='birthDate' id='birthDate', data-date-format="dd.mm.yyyy", placeholder='Дата рождения' value= bd)
 		.control-group
-			select.form-control(name='sex' id='sex', placeholder='Пол')
+			select.form-control(name='sex' id='sex' placeholder='Пол')
 		.control-group
-			select.form-control(name='position' id='position', placeholder='Позиционирование')
+			select.form-control(name='position' id='position' placeholder='Позиционирование')
 		.control-group
 			input.form-control(type='text', name='country' id='country', placeholder='Страна')
 		.control-group
-			input.form-control(type='text', name='city' id='city', placeholder='Город')
+			select.form-control(name='city' id='city' placeholder='Город')
+				-for (idx in cities) {
+					-console.log(cities[idx].id)
+					-console.log(user.city.id)
+					-if (cities[idx].id === user.city){
+					option(selected='selected' value= cities[idx].id) #{cities[idx].name}
+					-} else {
+					option(value= cities[idx].id) #{cities[idx].name}
+					-}
+				-}
 		input.btn.btn-lg.btn-primary(type='submit', value='Изменить')
 		input(type='hidden' name='_csrf' value= _csrf)

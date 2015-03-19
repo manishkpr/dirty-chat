@@ -46,13 +46,15 @@ module.exports = {
 			user.save(function (err, user) {
 				if (err) return next(err);
 
-				res.redirect('/user/show/' + user.id);
+			res.redirect('/user/show/' + user.id);
 			});
 		});
 	},
 
 	show: function(req, res, next) {
-		User.findOne(req.param('id'), function foundUser(err, user){
+		User.findOne(req.param('id'))
+		.populate('city')
+		.exec(function foundUser(err, user){
 			if (err) return next(err);
 			if (!user) return next();
 
@@ -73,31 +75,39 @@ module.exports = {
 	},
 
 	edit: function(req, res, next) {
-
+		var editObj;
 		User.findOne(req.param('id'), function foundUser(err, user) {
 			if (err) return next(err);
 			if(!user) return next('Пользователь не существует');
 
-			res.view({
-				user: user
+			City.find(function foundCities(err, cities) {
+				if (err) return next(err);
+
+				editObj = {
+					user: user,
+					cities: cities
+				};
+				res.view(editObj);
 			});
 		});
 	},
 
 	update: function(req, res, next) {
 		var userObj;
-		if (req.session.user.admin) {
+		if (req.session.User.admin) {
 			userObj = {
 				login: req.param('login'),
 				email: req.param('email'),
+				city: req.param('city'),
 				admin: req.param('admin')
 			};
 		}else {
 			userObj = {
 				login: req.param('login'),
-				email: req.param('email')
+				city: req.param('city'),
+				email: req.param('email'),
 			};
-		};
+		}
 
 		User.update(req.param('id'), userObj, function userUpdated(err) {
 			if (err) {

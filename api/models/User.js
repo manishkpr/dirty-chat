@@ -38,7 +38,9 @@ module.exports = {
 		},
 
 		sex: {
-			model: 'sex'
+			type: 'string',
+			enum: ['мужчина', 'женщина', 'транс'],
+			defaultsTo: 'транс'
 		},
 
 		country: {

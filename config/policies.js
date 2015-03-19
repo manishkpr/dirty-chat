@@ -37,8 +37,17 @@ module.exports.policies = {
     edit: "canUserEditProfile",
     update: "canUserEditProfile",
     '*': "admin"
-  }
+},
 
+  city: {
+      new: "flash",
+      create: "flash",
+      show:  "admin",
+      index: "admin",
+      edit: "admin",
+      update: "admin",
+      '*': "admin"
+  }
   /***************************************************************************
   *                                                                          *
   * Here's an example of mapping some policies to run before a controller    *

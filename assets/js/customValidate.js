@@ -71,12 +71,10 @@ var UserIndexPage = {
 			//var $userRow = $('tr[data-id="' + id +'"] td i').first();
 			$userRow.removeClass('fa-sign-out');
 			$userRow.addClass('fa-sign-in');
-			console.log('Зашел');
 		} else {
 			//$userRow.switchClass('fa-sign-in', 'fa-sign-out', 500, 'easeInOutQuad');
 			$userRow.removeClass('fa-sign-in');
 			$userRow.addClass('fa-sign-out');
-			console.log('Вышел');
 		}
 	}
 };

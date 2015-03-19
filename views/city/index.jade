@@ -1,0 +1,26 @@
+extends ../layout.jade
+block content
+	h3 Города
+	table.table.table-hover
+		tr
+			th ID
+			th Название
+			th
+			th
+		- cities.forEach(function(city) {
+		tr(data-id= city.id data-model="city")
+			td= city.id
+			td=	city.name
+			td
+				a.btn.btn-warning(href='/city/edit/' + city.id)
+					i.fa.fa-cog.fa-fw
+			td
+				form(action='/city/destroy/' + city.id, method='POST')
+					input(type='hidden', name='_method' value='delete')
+
+					button.btn.btn-danger(type='submit')
+						i.fa.fa-trash.fa-fw
+					input(type='hidden' name='_csrf' value= _csrf)
+		- });
+	a.btn.btn-success(href='/city/new/')
+		i.fa.fa-plus.fa-lg
