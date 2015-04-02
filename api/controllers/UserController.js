@@ -12,20 +12,28 @@ module.exports = {
 
 	create: function (req, res, next) {
 		var userObj;
-		if (req.session.user.admin) {
+		var userDef = typeof req.session.user == 'undefined';
+		
+		if ( !userDef && req.session.user.admin ) {
 			userObj = {
 				login: req.param('login'),
 				email: req.param('email'),
 				admin: req.param('admin'),
+				password: req.param('password'),
+				confirm: req.param('confirm'),
 				encryptedPassword: req.param('encryptedPassword')
 			};
 		}else {
 			userObj = {
 				login: req.param('login'),
 				email: req.param('email'),
+				password: req.param('password'),
+				confirm: req.param('confirm'),
 				encryptedPassword: req.param('encryptedPassword')
 			};
 		}
+
+		console.log(req.params);
 
 		User.create(userObj, function userCreated (err, user) {
 			if (err) {

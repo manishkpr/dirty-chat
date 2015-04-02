@@ -18,17 +18,20 @@ block content
 			label.checkbox Admin
 			input(type='checkbox', name='admin' unchecked)
 		.control-group
-			-var bd = '';
+			-var bd = '01.01.1950';
 			-if (user.birthDate){
 			-	bd = user.birthDate;
 			-}
-			input.form-control(type='text', name='birthDate' id='birthDate', data-date-format="dd.mm.yyyy", placeholder='Дата рождения' value= bd)
+			#dp.input-append.date(data-date='01.01.1950' data-date-format='dd.mm.yyyy' data-date-viewmode='years')
+				input.span2(size='16' type='text' name='birthDate' readonly value= bd)
+				span.add-on
+					i.icon-th	
 		.control-group
-			select.form-control(name='sex' id='sex' placeholder='Пол')
+			select.form-control(name='sex', id='sex', placeholder='Пол')
 		.control-group
-			select.form-control(name='position' id='position' placeholder='Позиционирование')
+			select.form-control(name='position', id='position', placeholder='Позиционирование')
 		.control-group
-			input.form-control(type='text', name='country' id='country', placeholder='Страна')
+			input.form-control(type='text', name='country', id='country', placeholder='Страна')
 		.control-group
 			select.form-control(name='city' id='city' placeholder='Город')
 				-for (idx in cities) {

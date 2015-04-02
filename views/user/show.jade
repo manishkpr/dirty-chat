@@ -7,5 +7,8 @@ block content
 	- var bd = user.birthDate.toString();
 	h5= 'Дата рождения: ' + bd
 	-}
+	-if (user.city) {
 	h5= 'Город: ' + user.city.name
+	-}
+	
 	a.btn.btn-link(href='/user/edit/' + user.id) изменить

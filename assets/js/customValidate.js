@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	$('#dp').datepicker();
+
 	if($('form').is('#sign-up-form')) {
 		$('#sign-up-form').validate({
 			rules: {
@@ -25,9 +27,7 @@ $(document).ready(function() {
 		});
 	}
 
-	if($('input').is('#birthDate')){
-		$('input').is('#birthDate').datepicker();
-	}
+
 
 	if($('button').is('#send-message'))	{
 		$('#send-message').click(function(){

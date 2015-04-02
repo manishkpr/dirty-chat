@@ -10,7 +10,7 @@ html(lang=ru)
 		link(rel='stylesheet', href='/css/my.css')
 		link(rel='stylesheet', href='/css/datepicker.css')
 		link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css')
-		//link(rel='stylesheet', href='/css/bootstrap-responsive.css')
+		//link(rel='stylesheet', href='/css/font-awesome/css/font-awesome.min.css')
 		<!--STYLES END-->
 		<!--SCRIPTS-->
 		script(src='/js/dependencies/sails.io.js')
@@ -21,7 +21,6 @@ html(lang=ru)
 		script(src='/js/customValidate.js')
 		script(src='/js/respond.min.js')
 		script(src='/js/html5shiv.js')
-		script(src='/js/site.min.js')
 		<!--SCRIPTS END-->
 	body
 		.navbar.navbar-inverse.navbar-fixed-top
@@ -51,7 +50,7 @@ html(lang=ru)
 										a.btn.btn-small(href='/session/destroy') Выйти
 									-};
 		.container-fluid
-			.row-fluid
+			.row
 				#main.span9
 					.container
 						block content
