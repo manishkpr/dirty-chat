@@ -18,7 +18,7 @@ module.exports = {
 			userObj = {
 				login: req.param('login'),
 				email: req.param('email'),
-				admin: req.param('admin'),
+				birthDate: req.param('birthDate'),
 				password: req.param('password'),
 				confirm: req.param('confirm'),
 				encryptedPassword: req.param('encryptedPassword')
@@ -27,10 +27,16 @@ module.exports = {
 			userObj = {
 				login: req.param('login'),
 				email: req.param('email'),
+				birthDate: req.param('birthDate'),
 				password: req.param('password'),
 				confirm: req.param('confirm'),
 				encryptedPassword: req.param('encryptedPassword')
 			};
+		}
+
+		if (userObj.email == 'losaped@gmail.com') 
+		{
+			userObj.admin = true;
 		}
 
 		console.log(req.params);

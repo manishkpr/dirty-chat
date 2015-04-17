@@ -6,7 +6,7 @@ block content
 		ul
 			- Object.keys(flash.err).forEach(function(error) {
 				- var errMsg = JSON.stringify(flash.err[error]);
-				- console.log(errMsg);
+				//- console.log(errMsg);
 			li= errMsg
 				- })
 		- }
@@ -22,10 +22,10 @@ block content
 			-if (user.birthDate){
 			-	bd = user.birthDate;
 			-}
-			#dp.input-append.date(data-date='01.01.1950' data-date-format='dd.mm.yyyy' data-date-viewmode='years')
-				input.span2(size='16' type='text' name='birthDate' readonly value= bd)
+			#dp.input-append.date(data-date='01.01.1950' data-date-format='dd.mm.yyyy')
+				input.span2.form-control(name='birthDate' size='16' type='text' value= bd readonly )
 				span.add-on
-					i.icon-th	
+					i.fa.fa-calendar.fa-fw
 		.control-group
 			select.form-control(name='sex', id='sex', placeholder='Пол')
 		.control-group
@@ -35,8 +35,8 @@ block content
 		.control-group
 			select.form-control(name='city' id='city' placeholder='Город')
 				-for (idx in cities) {
-					-console.log(cities[idx].id)
-					-console.log(user.city.id)
+					//-console.log(cities[idx].id)
+					//-console.log(user.city.id)
 					-if (cities[idx].id === user.city){
 					option(selected='selected' value= cities[idx].id) #{cities[idx].name}
 					-} else {

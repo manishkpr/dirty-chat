@@ -1,5 +1,10 @@
 $(document).ready(function() {
-	$('#dp').datepicker();
+	var bd = $('#dp').datepicker().on('changeDate', function(ev) {
+		var dt = new Date(ev.date);
+		//bd.datepicker("setValue", dt);
+		bd.hide();
+		$("input[name='birthDate']").val(dt);
+	}).data("datepicker");
 
 	if($('form').is('#sign-up-form')) {
 		$('#sign-up-form').validate({
