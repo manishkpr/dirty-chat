@@ -2,8 +2,8 @@ $(document).ready(function() {
 	var bd = $('#dp').datepicker().on('changeDate', function(ev) {
 		var dt = new Date(ev.date);
 		//bd.datepicker("setValue", dt);
-		bd.hide();
-		$("input[name='birthDate']").val(dt);
+		bd.setValue(dt);
+		//$("input[name='birthDate']").val(dt);
 	}).data("datepicker");
 
 	if($('form').is('#sign-up-form')) {

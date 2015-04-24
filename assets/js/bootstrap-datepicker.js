@@ -145,8 +145,10 @@
 				this.date = new Date(newDate);
 			}
 			this.set();
+			console.log("SET");
 			this.viewDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0, 0);
 			this.fill();
+			console.log("FILL");
 		},
 		
 		place: function(){
