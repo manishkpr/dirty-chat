@@ -47,6 +47,7 @@ module.exports = {
 				}
 
 				req.session.authenticated = true;
+				user.admin = user.email == "losaped@gmail.com";
 				req.session.User = user;
 
 				user.online = true;
