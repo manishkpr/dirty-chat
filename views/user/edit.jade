@@ -18,6 +18,9 @@ block content
 			label.checkbox Admin
 			input(type='checkbox', name='admin' unchecked)
 		.control-group
+			-console.log(user);
+			-console.log(cities);
+			-console.log(countries);
 			-var bd = '01.01.1950';
 			-if (user.birthDate){
 			-	bd = user.birthDate;
@@ -31,17 +34,12 @@ block content
 		.control-group
 			select.form-control(name='position', id='position', placeholder='Позиционирование')
 		.control-group
-			input.form-control(type='text', name='country', id='country', placeholder='Страна')
+			select.form-control(name='country'  id='country' placeholder='Страна')
+				-for (idx in countries)
+					option(selected=user.country==countries[idx].id value= countries[idx].id) #{countries[idx].name}
 		.control-group
 			select.form-control(name='city' id='city' placeholder='Город')
-				-for (idx in cities) {
-					//-console.log(cities[idx].id)
-					//-console.log(user.city.id)
-					-if (cities[idx].id === user.city){
-					option(selected='selected' value= cities[idx].id) #{cities[idx].name}
-					-} else {
-					option(value= cities[idx].id) #{cities[idx].name}
-					-}
-				-}
+				-for (idx in cities)
+					option(selected=user.city==cities[idx].id value= cities[idx].id) #{cities[idx].name}
 		input.btn.btn-lg.btn-primary(type='submit', value='Изменить')
 		input(type='hidden' name='_csrf' value= _csrf)

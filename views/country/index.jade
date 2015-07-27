@@ -1,0 +1,26 @@
+extends ../layout.jade
+block content
+	h3 Страны
+	table.table.table-hover
+		tr
+			th ID
+			th Название
+			th
+			th
+		- countries.forEach(function(country) {
+		tr(data-id= country.id data-model="country")
+			td= country.id
+			td=	country.name
+			td
+				a.btn.btn-warning(href='/country/edit/' + country.id)
+					i.fa.fa-cog.fa-fw
+			td
+				form(action='/country/destroy/' + country.id, method='POST')
+					input(type='hidden', name='_method' value='delete')
+
+					button.btn.btn-danger(type='submit')
+						i.fa.fa-trash.fa-fw
+					input(type='hidden' name='_csrf' value= _csrf)
+		- });
+	a.btn.btn-success(href='/country/new/')
+		i.fa.fa-plus.fa-lg

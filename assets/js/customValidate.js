@@ -42,6 +42,31 @@ $(document).ready(function() {
 			$('#messages').append('<blockquote><p>'+msg+'</p><small>Ромачка<small></div></div>');
 	});}
 
+	// var csrf;
+	// $.get('/csrfToken').done(function (resp) {
+	// 	csrf = resp._csrf;
+	// });
+
+	// setTimeout(function(){
+	// 	if ($('select').is('#city')){
+	// 		console.log(csrf);
+	// 		$.post('/city/index', {_csrf: csrf })
+	// 		.done(function(resp){
+	// 			$('#city').empty();
+	// 			console.log(resp.cities);
+
+	// 			$.each(resp.cities, function(i, city){
+	// 				$('#city').append('<option value="' + city.id + '"> ' +city.name + '</option>');
+	// 			});	
+	// 		})
+	// 		.fail(function() {
+	// 			alert("error");
+	// 		});
+	// 	}
+	// 	}, 0	
+	// );
+	
+
 	var socket = io.sails.connect();
 
 	socket.on('connect', function socketConnected(message) {
@@ -51,8 +76,9 @@ $(document).ready(function() {
 			updateUserInDom(userId, message);
 		});
 
-		var resp = socket.get('/user/subscribe');
+		socket.get('/user/subscribe');
 	});
+
 });
 
 function updateUserInDom(id, msg) {
@@ -67,17 +93,15 @@ function updateUserInDom(id, msg) {
 			}
 			break;
 	}
-}
+};
 
 var UserIndexPage = {
 	updateUser: function(id, message) {
 		var $userRow = $('tr[data-id="' + id +'"] td i').first();
 		if (message.data.loggedIn) {
-			//var $userRow = $('tr[data-id="' + id +'"] td i').first();
 			$userRow.removeClass('fa-sign-out');
 			$userRow.addClass('fa-sign-in');
 		} else {
-			//$userRow.switchClass('fa-sign-in', 'fa-sign-out', 500, 'easeInOutQuad');
 			$userRow.removeClass('fa-sign-in');
 			$userRow.addClass('fa-sign-out');
 		}

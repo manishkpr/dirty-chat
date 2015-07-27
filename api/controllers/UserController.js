@@ -89,19 +89,30 @@ module.exports = {
 	},
 
 	edit: function(req, res, next) {
-		var editObj;
+		var viewSource = {};
+		
 		User.findOne(req.param('id'), function foundUser(err, user) {
 			if (err) return next(err);
 			if(!user) return next('Пользователь не существует');
 
+			viewSource.user = user;
+						
 			City.find(function foundCities(err, cities) {
-				if (err) return next(err);
+				if (err) return next(function (){
+					res.view(viewSource);
+				});
 
-				editObj = {
-					user: user,
-					cities: cities
-				};
-				res.view(editObj);
+				viewSource.cities = cities;
+				console.log(viewSource);
+				Country.find(function foundCountries(err, countries){
+			 		if (err) return next(function (){
+						res.view(viewSource);
+					});
+
+			 		viewSource.countries = countries;
+			 		console.log(viewSource);
+			 		res.view(viewSource);
+				});
 			});
 		});
 	},

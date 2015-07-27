@@ -41,7 +41,13 @@ module.exports = {
 		City.find().exec(function findCities(err, cities) {
 			if (err) return next(err);
 
-			res.view({ cities: cities });
+			if (req.method == 'POST'){
+				console.log(req);
+				console.log({cities: cities });
+				res.jsonp({cities: cities});
+			}else{
+				res.view({ cities: cities });
+			}
 		});
 	},
 

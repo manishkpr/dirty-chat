@@ -1,0 +1,16 @@
+extends ../layout.jade
+block content
+	form(action='/country/create' method='POST')
+		h2.form-signin-heading Cоздать страну
+		- if (flash && flash.err) {
+		ul
+			- Object.keys(flash.err).forEach(function(error) {
+				- var errMsg = JSON.stringify(flash.err[error]);
+				- console.log(errMsg);
+			li= errMsg
+				- })
+		- }
+		.control-group
+			input.form-control(type='text', name='name' id='inputName', placeholder='Название')
+		input.btn.btn-lg.btn-primary(type='submit', value='Создать')
+		input(type='hidden' name='_csrf' value= _csrf)
