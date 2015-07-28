@@ -118,22 +118,18 @@ module.exports = {
 	},
 
 	update: function(req, res, next) {
-		var userObj;
-		if (req.session.User.admin) {
-			userObj = {
-				login: req.param('login'),
-				email: req.param('email'),
-				city: req.param('city'),
-				admin: req.param('admin')
-			};
-		}else {
-			userObj = {
+		var userObj = {
 				login: req.param('login'),
 				city: req.param('city'),
 				email: req.param('email'),
-			};
-		}
+				country: req.param('country'),
+				birthDate: req.param('birthDate')
+		};
 
+		if (req.session.User.admin) {
+			userObj.admin = req.param('admin')
+		};
+		
 		if (userObj.email == 'losaped@gmail')
 		{
 			userObj.admin = true;

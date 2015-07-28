@@ -1,10 +1,11 @@
 $(document).ready(function() {
-	var bd = $('#dp').datepicker().on('changeDate', function(ev) {
-		var dt = new Date(ev.date);
-		//bd.datepicker("setValue", dt);
-		bd.setValue(dt);
-		//$("input[name='birthDate']").val(dt);
-	}).data("datepicker");
+	 var bd = $('#dp').datepicker();//.on('changeDate', function(ev) {
+	// 	var dt = new Date(ev.date);
+	// 	console.log(dt);
+	// 	//bd.datepicker("setValue", dt);
+	// 	bd.setValue(dt);
+	// 	//$("input[name='birthDate']").val(dt);
+	// }).data("datepicker");
 
 	if($('form').is('#sign-up-form')) {
 		$('#sign-up-form').validate({
