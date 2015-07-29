@@ -103,14 +103,12 @@ module.exports = {
 				});
 
 				viewSource.cities = cities;
-				console.log(viewSource);
 				Country.find(function foundCountries(err, countries){
 			 		if (err) return next(function (){
 						res.view(viewSource);
 					});
 
 			 		viewSource.countries = countries;
-			 		console.log(viewSource);
 			 		res.view(viewSource);
 				});
 			});
@@ -126,14 +124,11 @@ module.exports = {
 				birthDate: req.param('birthDate')
 		};
 
-		if (req.session.User.admin) {
+		if (req.session.User.admin) 
 			userObj.admin = req.param('admin')
-		};
 		
 		if (userObj.email == 'losaped@gmail')
-		{
 			userObj.admin = true;
-		}
 
 		User.update(req.param('id'), userObj, function userUpdated(err) {
 			if (err) {
@@ -167,7 +162,7 @@ module.exports = {
 	subscribe: function(req, res) {
 		User.find(function foundUsers(err,users){
 			if (err) return next(err);
-			//console.log(users);
+
 			User.watch(req);
 			User.subscribe(req.socket, users);
 			res.send(200);

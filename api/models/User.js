@@ -96,8 +96,8 @@ module.exports = {
 
 	beforeValidate: function(values, next) {
 		console.log(values);
-		//var splitDate = values.birthDate.toString().split('.');
-		//values.birthDate = new Date(splitDate[2], splitDate[1] - 1, splitDate[0]);
+		var splitDate = values.birthDate.toString().split('.');
+		values.birthDate = new Date(splitDate[2], splitDate[1] - 1, splitDate[0]);
 		next();
 	}
 };

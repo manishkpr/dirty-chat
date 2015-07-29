@@ -18,14 +18,9 @@ block content
 			label.checkbox Admin
 			input(type='checkbox', name='admin' unchecked)
 		.control-group
-			-console.log(user);
-			-console.log(cities);
-			-console.log(countries);
-			-var bd = '01.01.1950';
-			-if (user.birthDate){
-			-	bd = user.birthDate;
-			-}
-			#dp.input-append.date(data-date='01.01.1950' data-date-format='dd.mm.yyyy')
+			-var bd = user.birthDate? user.birthDate : '01.01.1950';
+			
+			#dp.input-append.date(data-date= bd data-date-format='dd.mm.yyyy')
 				input.span2.form-control(name='birthDate' size='16' type='text' value= bd readonly )
 				span.add-on
 					i.fa.fa-calendar.fa-fw
